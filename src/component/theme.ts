@@ -4,14 +4,16 @@ export const blue = "#2F46B0";
 export const grey = "#B9C1CD";
 export const black = '#070728';
 
+export const Wrapper = styled.div``
+
 export const Input = styled.input`
     appearance: none;
     margin: auto;
     height: 7px;
     position: relative;
     cursor: pointer;
-    border-radius: 34px;
-    background: ${grey};
+    background: transparent;
+    z-index: 3;
 
     &::-webkit-slider-thumb {
         appearance: none;
@@ -68,13 +70,12 @@ export const Input = styled.input`
 
 `
 
-export const Line = styled.div<{$widthBeforeTumb: number}>`
+export const Line = styled.div<{$widthBeforeTumb?: number; $isActive?: boolean}>`
     position: absolute;
-    width: ${({$widthBeforeTumb}) => `${$widthBeforeTumb}px`};
+    width: ${({$widthBeforeTumb, $isActive}) => $isActive ? `${$widthBeforeTumb}px` : '100%'};
     height: 100%;
-    background: ${blue};
-    border-top-left-radius: 34px;
-    border-bottom-left-radius: 34px;
+    background: ${({$isActive}) => $isActive ? blue : grey};
+    border-radius:  ${({$isActive}) => $isActive ? '34px 0 0 34px' : '34px'};
 `
 
 export const InputWrapper = styled.div<{$width: string}>`

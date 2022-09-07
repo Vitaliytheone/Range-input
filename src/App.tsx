@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 function App() {
     return (
         <Wrapper>
-            <RangInput min={0} max={300} width="400px" label="Range input" withBottomInfo />
+            <RangInput min={0} max={200} width="400px" label="Range input" withBottomInfo />
         </Wrapper>
     );
 }
