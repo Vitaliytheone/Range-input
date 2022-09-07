@@ -14,7 +14,7 @@ export const TooltipWrap = styled.div<{$transformWidth: number}>`
     top: 24px;
     width: 100px;
     text-align: center;
-    transform:  ${({$transformWidth}) =>  `translateX(${$transformWidth - 48}px)`};
+    transform:  ${({$transformWidth}) =>  `translateX(${$transformWidth - 50}px)`};
     z-index: 999;
 
     &:before {

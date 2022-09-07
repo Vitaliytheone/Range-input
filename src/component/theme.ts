@@ -33,6 +33,39 @@ export const Input = styled.input`
         cursor: pointer;
     }
 
+    &::-ms-fill-lower {
+        background: ${blue};
+    }
+
+    &::-ms-thumb {
+        width: 24px;
+        height: 24px;
+        background: ${blue};
+        border-radius: 50%;
+        border: 4px solid #fff; 
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    &::-ms-ticks-after {
+        display: none;
+    }
+
+    &::-ms-ticks-before {
+        display: none;
+    }
+
+    &::-ms-track {
+        background: ${grey};
+        color: transparent;
+        height: 7px;
+        border: none;
+    }
+
+    &::-ms-tooltip {
+        display: none;
+    } 
+
 `
 
 export const Line = styled.div<{$widthBeforeTumb: number}>`
