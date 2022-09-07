@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-const blue = "#2F46B0";
-const grey = "#B9C1CD";
+export const blue = "#2F46B0";
+export const grey = "#B9C1CD";
+export const black = '#070728';
 
 export const Input = styled.input`
     appearance: none;
@@ -43,7 +44,7 @@ export const Line = styled.div<{$widthBeforeTumb: number}>`
     border-bottom-left-radius: 34px;
 `
 
-export const Wrapper = styled.div<{$width: string}>`
+export const InputWrapper = styled.div<{$width: string}>`
     width: ${({$width}) => $width};
     display: flex;
     flex-direction: column;
