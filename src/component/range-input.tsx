@@ -12,24 +12,31 @@ type TRangeInput = {
     label?: string;
     withBottomInfo?: boolean;
     value?: number;
+    onSetValue?: (value: number) => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const RangeInput = ({
     min,
     max,
-    width = "200px",
     label,
+    value,
+    width = "200px",
     withTooltip = true,
     withBottomInfo,
-    value,
+    onSetValue,
     ...props
 }: TRangeInput) => {
     const [range, setRange] = useState<number>(value ?? 0);
     const [step, setStep] = useState(0);
     const ref = useRef<HTMLInputElement>(null);
 
-    const getRange = (ev: any) => {
-        setRange(ev.target.value);
+    const onRecordValue = (e: React.SyntheticEvent<HTMLInputElement>) => {
+        onSetValue && onSetValue(Number((e.target as HTMLInputElement).value));
+    };
+
+    const getRange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setRange(Number(e.target.value));
+        props.onChange && props.onChange(e);
     };
 
     useEffect(() => {
@@ -42,9 +49,9 @@ const RangeInput = ({
     const isDisplayTooltip = range > min && range < max && withTooltip;
 
     return (
-        <Wrapper>
+        <Wrapper $width={width}>
             {label && <Label>{label}</Label>}
-            <InputWrapper $width={width}>
+            <InputWrapper>
                 <Line></Line>
                 <Input
                     {...props}
@@ -54,12 +61,14 @@ const RangeInput = ({
                     max={max}
                     value={range}
                     onChange={getRange}
+                    onMouseUp={onRecordValue}
+                    onTouchEnd={onRecordValue}
                     ref={ref}
                 />
                 <Line $isActive $widthBeforeTumb={widthBeforeTumb}></Line>
                 {isDisplayTooltip && <Tooltip transformWidth={widthBeforeTumb}>{range}</Tooltip>}
-                {withBottomInfo && <BottomInfo min={String(min)} max={String(max)} />}
             </InputWrapper>
+            {withBottomInfo && <BottomInfo min={String(min)} max={String(max)} />}
         </Wrapper>
     );
 };

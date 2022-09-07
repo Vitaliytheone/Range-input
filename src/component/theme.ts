@@ -4,9 +4,8 @@ export const blue = "#2F46B0";
 export const grey = "#B9C1CD";
 export const black = '#070728';
 
-export const Wrapper = styled.div``
-
 export const Input = styled.input`
+    width: 100%;
     appearance: none;
     margin: auto;
     height: 7px;
@@ -78,15 +77,14 @@ export const Line = styled.div<{$widthBeforeTumb?: number; $isActive?: boolean}>
     border-radius:  ${({$isActive}) => $isActive ? '34px 0 0 34px' : '34px'};
 `
 
-export const InputWrapper = styled.div<{$width: string}>`
-    width: ${({$width}) => $width};
+export const InputWrapper = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
-
-    ${Input} {
-        width: ${({$width}) => $width};
-    }
+    width: 100%;
 `
 
+export const Wrapper = styled.div<{$width: string}>`
+    width: ${({$width}) => $width};
+`
 
