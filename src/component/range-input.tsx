@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { BottomInfo } from "./bottom-info";
 import { Label } from "./label";
 import { Input, InputWrapper, Line, Wrapper } from "./theme";
@@ -28,7 +28,12 @@ const RangeInput = ({
 }: TRangeInput) => {
     const [range, setRange] = useState<number>(value ?? 0);
     const [step, setStep] = useState(0);
+    const [inputWidth, setInputWidth] = useState(0);
     const ref = useRef<HTMLInputElement>(null);
+
+    const onResize = useCallback(() => {
+        if (ref.current) setInputWidth(ref.current.offsetWidth);
+    }, []);
 
     const onRecordValue = (e: React.SyntheticEvent<HTMLInputElement>) => {
         onSetValue && onSetValue(Number((e.target as HTMLInputElement).value));
@@ -40,10 +45,18 @@ const RangeInput = ({
     };
 
     useEffect(() => {
+        window.addEventListener("resize", onResize);
+        onResize();
+        return () => {
+            window.removeEventListener("resize", onResize);
+        };
+    }, [onResize]);
+
+    useEffect(() => {
         const rangeLinePadding = 24;
-        const calcStep = (ref.current!.offsetWidth - rangeLinePadding) / Number(ref.current!.max);
+        const calcStep = (inputWidth - rangeLinePadding) / Number(ref.current!.max);
         setStep(calcStep);
-    }, []);
+    }, [max, inputWidth]);
 
     useEffect(() => {
         if (value !== undefined && value >= 0) {
