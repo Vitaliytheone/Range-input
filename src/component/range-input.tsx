@@ -45,6 +45,12 @@ const RangeInput = ({
         setStep(calcStep);
     }, []);
 
+    useEffect(() => {
+        if (value !== undefined && value >= 0) {
+            setRange(value);
+        }
+    }, [value]);
+
     const widthBeforeTumb = range * step;
     const isDisplayTooltip = range > min && range < max && withTooltip;
 

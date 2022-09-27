@@ -86,5 +86,9 @@ export const InputWrapper = styled.div`
 
 export const Wrapper = styled.div<{$width: string}>`
     width: ${({$width}) => $width};
+
+    @media screen and (max-width: 600px) {
+        width: 100%;
+    }
 `
 
